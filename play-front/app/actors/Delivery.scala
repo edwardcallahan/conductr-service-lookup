@@ -24,7 +24,7 @@ class Delivery extends Actor with ActorLogging {
   import Messages._
   implicit val timeout = Timeout(5.seconds)
   implicit val executionContext = context.dispatcher
-  val ferry = LocationService.getLookupUrl("/transport", "http://127.0.0.1:9666/transport")
+  val ferry = LocationService.getLookupUrl("/ferry", "http://127.0.0.1:9666/ferry")
 
   def receive = {
     case delivery: DeliveryMsg =>
