@@ -44,10 +44,10 @@ object ApplicationMain extends App {
 
   private def routeFerry(
     ferry: ActorRef)(implicit ec: ExecutionContext): Route =
-    path("transport") {
-      get {
-        complete {
-          ferry ask TransportMessage("Hi") map {
+    path("transport" / Segment) { msg =>
+      put {
+         complete {
+          ferry ask TransportMessage(msg) map {
             case Status.Success =>
               Future.successful(StatusCodes.OK)
             case Status.Error =>

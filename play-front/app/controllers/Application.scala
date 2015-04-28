@@ -8,8 +8,7 @@ import akka.actor.Props
 import akka.pattern.ask
 import akka.util.Timeout
 import app.actors.Delivery
-import app.actors.Messages.Ack
-import app.actors.Messages.DeliveryMsg
+import app.actors.Delivery.{Ack, DeliveryMsg}
 import play.api.mvc.Action
 import play.api.mvc.Controller
 
