@@ -1,15 +1,16 @@
 import play.PlayImport._
 import sbt._
+import sbt.Resolver.bintrayRepo
 
 object Dependencies{
 
   lazy val PlayVer = "2.3.8"
-  lazy val AkkaVer  = "2.3.9"
-  lazy val AkkaHttpVer = "1.0-M5"
-  lazy val ConductrBundleLibVer = "0.7.1"
+  lazy val AkkaVer  = "2.3.10"
+  lazy val AkkaHttpVer = "1.0-RC1"
+  lazy val ConductrBundleLibVer = "0.11.0"
 
   lazy val conductrPlayScala = Seq(
-    "com.typesafe.conductr"      %% "play-conductr-bundle-lib" 			% ConductrBundleLibVer,
+    "com.typesafe.conductr"      %% "play23-conductr-bundle-lib"		% ConductrBundleLibVer,
     anorm,
     cache,
     ws
@@ -34,7 +35,7 @@ object Dependencies{
   lazy val conductrAkkaScala = Seq(
     "com.typesafe.akka" 		%%	"akka-actor" 						% AkkaVer,
     "com.typesafe.akka" 		%%	"akka-testkit"  					% AkkaVer,
-    "com.typesafe.conductr" 	%%	"akka-conductr-bundle-lib"	 		% ConductrBundleLibVer
+    "com.typesafe.conductr" 	%%	"akka23-conductr-bundle-lib"		% ConductrBundleLibVer
   )
 
 

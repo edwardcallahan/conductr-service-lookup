@@ -18,7 +18,7 @@ lazy val charonShopApp = (project in file("play-front"))
     BundleKeys.memory := 64.MiB,
     BundleKeys.diskSpace := 15.MB,
     BundleKeys.roles  := Set("frontend"),
-    BundleKeys.endpoints := Map("charon" -> Endpoint("http",0, Set(URI("http://:9000/charon")))),
+    BundleKeys.endpoints := Map("charon" -> Endpoint("http", services = Set(URI("http://:9000/charon")))),
     BundleKeys.startCommand += "-Dhttp.port=$CHARON_BIND_PORT -Dhttp.address=$CHARON_BIND_IP",
     libraryDependencies ++= Dependencies.conductrPlayScala,
     fork in run := true
@@ -35,7 +35,7 @@ lazy val ferryService = (project in file("akka-back"))
     BundleKeys.diskSpace := 15.MB,
     BundleKeys.roles  := Set("backend"),
     BundleKeys.endpoints := Map(
-      "ferry" -> Endpoint("http", 0, Set(URI("http://:9666/ferry")))),
+      "ferry" -> Endpoint("http", services = Set(URI("http://:9666/ferry")))),
     libraryDependencies ++= Dependencies.conductrAkkaScala,
     fork in run := true
   )
