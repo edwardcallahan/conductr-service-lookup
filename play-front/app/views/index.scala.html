@@ -1,7 +1,22 @@
-@(message: String)
+@import controllers.Application.DeceasedMsg
 
-@main("Welcome to Play") {
+@(msg: String, dmsgForm: Form[DeceasedMsg])
 
-    @play20.welcome(message)
+<!DOCTYPE html>
 
-}
+<html>
+    <head>
+        <title>@msg</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        @helper.form(action = routes.Application.sendMsg()){
+        @helper.inputText(dmsgForm("message"))
+        <div class="form-actions">
+           <button id="submit" type="submit" class="btn btn-primary">Send</button>
+        </div>
+        }
+    </body>
+</html>

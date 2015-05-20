@@ -6,7 +6,7 @@ class BoatActor extends Actor with ActorLogging {
 
   def receive = {
     case TransportMessage(msg) =>
-      log.info("In BoatActor - received message: {}", msg)
+      log.info("BoatActor - received message: {}", msg)
       sender() ! Status.Success
   }
 }
