@@ -5,6 +5,7 @@
 # Home page
 GET     /                           controllers.Application.index
 POST    /                           controllers.Application.sendMsg
+
 # Results
 GET     /ferryResults               controllers.Application.ferryResults(replyMsg: String)
 
