@@ -7,11 +7,12 @@
 <html>
     <head>
         <title>@msg</title>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")">
     </head>
     <body>
+        <img src="@routes.Assets.at("images/typesafe_conductR_full_color.svg")" class="conductr-logo">
         @helper.form(action = routes.Application.sendMsg()){
         @helper.inputText(dmsgForm("message"))
         <div class="form-actions">

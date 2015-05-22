@@ -1,0 +1,64 @@
+    body{
+        background: #f0f3f6;
+        text-align: center;
+        font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+        font-size: 1em;
+        color: #103a51;
+    }
+    .conductr-logo {
+        width: 200px;
+        margin-bottom: 20px;
+    }
+    #message_field {
+        text-align: left;
+        background-color: white;
+        border-radius: 3px;
+        border-bottom: 2px solid #c2d2dc;
+        padding: 20px;
+        max-width: 300px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        margin: 0 auto 0 auto;
+    }
+    #message_field label {
+        font-size: 1.225em;
+        font-weight: 700;
+        margin: 0 0 6px 0;
+        text-transform: uppercase;
+        display: block;
+    }
+    #message_field dd {
+        margin: 0;
+        padding: 0;
+    }
+    #message_field input {
+        height: 26px;
+        padding: 4px;
+        width: 288px;
+        font-size: 1.2em;
+        color: #103a51;
+    }
+    #message_field .info {
+        color: #D64546;
+    }
+    button {
+        transition: all 200ms ease-in-out;
+        display: inline-block;
+        line-height: 1.4em;
+        padding: 0.7em 1.5em;
+        margin: 5px 0;
+        background-color: #53CDEC;
+        border: none;
+        border-bottom: 2px solid #19aacf;
+        color: white !important;
+        text-transform: uppercase;
+        font-size: 1em;
+        font-weight: 700;
+        text-align: center;
+        border-radius: 3px;
+        width: 340px;
+    }
+    button:hover {
+        text-decoration: none;
+        background-color: #42b8d7;
+        color: white !important;
+    }
