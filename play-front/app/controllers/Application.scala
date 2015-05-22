@@ -3,6 +3,7 @@ package controllers
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.Future
+import scala.util.control.NonFatal
 import play.api.data.Form
 import play.api.data.Forms.{ nonEmptyText, mapping }
 
@@ -37,7 +38,9 @@ object Application extends Controller {
         deliveryActor.ask(new DeliveryMsg(formData.msg)) map {
           case Ack =>  Redirect(routes.Application.ferryResults("Message Successfully Delivered"))
           case _ =>  Redirect(routes.Application.ferryResults("Unable to deliver message at this time. Try again!"))
-        }
+          } recover {
+            case NonFatal(_) => Redirect(routes.Application.ferryResults("Cannot connect to the backend service. Try again!"))
+          }
       })
   }
 
