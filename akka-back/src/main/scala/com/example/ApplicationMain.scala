@@ -44,15 +44,17 @@ object ApplicationMain extends App {
 
   private def routeFerry(
     ferry: ActorRef)(implicit ec: ExecutionContext): Route =
-    path("transport" / Segment) { msg =>
-      put {
-         complete {
-          ferry ask TransportMessage(msg) map {
-            case Status.Success =>
-              Future.successful(StatusCodes.OK)
-            case Status.Error =>
-              Future.failed(new Throwable(StatusCodes.BadRequest.value))
-          }
+    pathPrefix("transport") {
+      path("message" / Segment) { msg =>
+        get {
+            complete {
+              ferry ask TransportMessage(msg) map {
+                case Status.Success =>
+                  Future.successful(StatusCodes.OK)
+                case Status.Error =>
+                  Future.failed(new Throwable(StatusCodes.BadRequest.value))
+              }
+            }
         }
       }
     }

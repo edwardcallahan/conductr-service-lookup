@@ -9,6 +9,8 @@ import akka.pattern.pipe
 import akka.util.Timeout
 import play.api.Play.current
 import play.api.libs.ws.WS
+import java.io.UnsupportedEncodingException
+import java.net.URLEncoder
 
 object Delivery {
   def props(): Props = Props(new Delivery)
@@ -22,12 +24,12 @@ class Delivery extends Actor with ActorLogging {
   import Delivery._
   implicit val timeout = Timeout(5.seconds)
   implicit val executionContext = context.dispatcher
-  val ferry = LocationService.getLookupUrl("/ferry", "http://127.0.0.1:9666/ferry")
+  val ferry = LocationService.getLookupUrl("/ferry", "http://127.0.0.1:9666")
 
   def receive = {
     case delivery: DeliveryMsg =>
-      val msg = delivery.msg
-      WS.url(s"$ferry/transport/$msg").withFollowRedirects(follow = true).put(Map("msg" -> Seq(msg)))
+      val msg = URLEncoder.encode(delivery.msg, "UTF-8")
+      WS.url(s"$ferry/transport/message/$msg").withFollowRedirects(follow = true).get
         .map { response =>
           response.status match {
             case 200 => Ack
