@@ -6,7 +6,7 @@ object Dependencies{
 
   lazy val PlayVer = "2.3.9"
   lazy val AkkaVer  = "2.3.11"
-  lazy val AkkaHttpVer = "1.0-RC2"
+  lazy val AkkaHttpVer = "1.0-RC3"
   lazy val ConductrBundleLibVer = "0.13.0"
 
   lazy val conductrPlayScala = Seq(

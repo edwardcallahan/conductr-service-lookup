@@ -18,8 +18,8 @@ lazy val charonShopApp = (project in file("play-front"))
     BundleKeys.memory := 64.MiB,
     BundleKeys.diskSpace := 15.MB,
     BundleKeys.roles  := Set("frontend"),
-    BundleKeys.endpoints := Map("charon" -> Endpoint("http", services = Set(URI("http://:9000/charon")))),
-    BundleKeys.startCommand += "-Dhttp.port=$CHARON_BIND_PORT -Dhttp.address=$CHARON_BIND_IP -Dapplication.context=/charon/",
+    BundleKeys.endpoints := Map("charon" -> Endpoint("http", services = Set(URI("http://:9000")))),
+    BundleKeys.startCommand += "-Dhttp.port=$CHARON_BIND_PORT -Dhttp.address=$CHARON_BIND_IP",
     libraryDependencies ++= Dependencies.conductrPlayScala,
     fork in run := true
   )
