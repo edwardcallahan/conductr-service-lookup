@@ -24,7 +24,7 @@ http://:9666/ferry   cc08f55    ferry-boat   Running
 Perform a get on the index page of Charon's Shop.
 
 ```bash
-http://127.0.0.1:9000/charon
+http://{docker-host-ip}:9000
 ```
 Successful delivery will be noted by `Message Delivered` indicating successful communication with the Ferry Service.
 

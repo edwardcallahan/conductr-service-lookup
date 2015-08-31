@@ -4,21 +4,19 @@ import sbt.Resolver.bintrayRepo
 
 object Dependencies{
 
-  lazy val PlayVer = "2.3.9"
-  lazy val AkkaVer  = "2.3.11"
-  lazy val AkkaHttpVer = "1.0-RC3"
-  lazy val ConductrBundleLibVer = "0.13.0"
+  lazy val PlayVer = "2.4.2"
+  lazy val AkkaVer  = "2.3.12"
+  lazy val AkkaHttpVer = "1.0"
+  lazy val ConductrBundleLibVer = "1.0.1"
 
   lazy val conductrPlayScala = Seq(
-    "com.typesafe.conductr"      %% "play23-conductr-bundle-lib"		% ConductrBundleLibVer,
-    anorm,
-    cache,
+    "com.typesafe.conductr"      %% "play24-conductr-bundle-lib"		% ConductrBundleLibVer,
     ws
   )
 
   lazy val ferryManProject = conductrAkkaScala ++ akkaHttp ++ Seq(
     "com.typesafe.play"         %%	"play-json"                         % PlayVer,
-    "ch.qos.logback"            %	"logback-classic"                   % "1.1.2"           % "compile",
+    "ch.qos.logback"            %	  "logback-classic"                   % "1.1.2"           % "compile",
     "org.scalatest"             %% 	"scalatest"                         % "2.2.4"           % "test",
     "org.slf4j"                 % 	"slf4j-api"                         % "1.7.7",
     "com.typesafe"              % 	"config"                            % "1.2.1",
