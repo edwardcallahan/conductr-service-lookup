@@ -5,19 +5,15 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.DurationInt
 import com.typesafe.conductr.bundlelib.akka.{ ConnectionContext, StatusService }
 import com.typesafe.config.ConfigFactory
-import akka.actor.{ ActorRef, ActorSystem, Props }
+import akka.actor.{ ActorRef, ActorSystem }
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.marshalling.ToResponseMarshallable.apply
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directive.{ addByNameNullaryApply, addDirectiveApply }
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
-import akka.http.scaladsl.server.RouteResult.route2HandlerFlow
 import akka.pattern.ask
-import akka.stream.FlowMaterializer
-import akka.stream.scaladsl.Sink
 import akka.util.Timeout
-import akka.stream.ActorFlowMaterializer
 
 object Status {
   case class Success()
@@ -31,7 +27,7 @@ object ApplicationMain extends App {
 
   implicit val system = ActorSystem("FerryActorSystem")
   implicit val cc = ConnectionContext()
-  import cc.actorFlowMaterializer
+  import cc.actorMaterializer
   implicit val timeout = Timeout(5.seconds)
   val boatActor = system.actorOf(BoatActor.props, "boatActor")
 
@@ -51,7 +47,7 @@ object ApplicationMain extends App {
               ferry ask TransportMessage(msg) map {
                 case Status.Success =>
                   Future.successful(StatusCodes.OK)
-                case Status.Error =>
+                case Status.Error(_) =>
                   Future.failed(new Throwable(StatusCodes.BadRequest.value))
               }
             }

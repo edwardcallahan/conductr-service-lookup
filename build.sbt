@@ -1,16 +1,19 @@
 import ByteConversions._
-import play.PlayScala
 
 name := "conductR-service-lookup"
 
+SandboxKeys.image in Global := "conductr/conductr"
+SandboxKeys.imageVersion in Global := "latest"
+SandboxKeys.nrOfContainers in Global := 3
+
 lazy val commonSettings = Seq(
-	version := "0.1.0-SNAPSHOT",
-	scalaVersion := "2.11.6"
-)	
+  version := "0.1.0-SNAPSHOT",
+  scalaVersion := "2.11.7"
+)
 
 lazy val charonShopApp = (project in file("play-front"))
+  .enablePlugins(PlayScala, ConductRPlugin, ConductRSandbox)
   .settings(commonSettings: _*)
-  .enablePlugins(JavaAppPackaging, PlayScala, ConductRPlugin) 
   .settings(
     name := "charon-shop",
     description := "Dead Man Delivery - Web Shop",
@@ -21,12 +24,13 @@ lazy val charonShopApp = (project in file("play-front"))
     BundleKeys.endpoints := Map("charon" -> Endpoint("http", services = Set(URI("http://:9000")))),
     BundleKeys.startCommand += "-Dhttp.port=$CHARON_BIND_PORT -Dhttp.address=$CHARON_BIND_IP",
     libraryDependencies ++= Dependencies.conductrPlayScala,
-    fork in run := true
+    fork in run := true,
+    routesGenerator := InjectedRoutesGenerator
   )
 
 lazy val ferryService = (project in file("akka-back"))
+  .enablePlugins(ConductRPlugin, ConductRSandbox)
   .settings(commonSettings: _*)
-  .enablePlugins(JavaAppPackaging, ConductRPlugin)
   .settings(
     name := "ferry-boat",
     description := "River Boat Transport Services, LLC",
@@ -39,5 +43,3 @@ lazy val ferryService = (project in file("akka-back"))
     libraryDependencies ++= Dependencies.conductrAkkaScala,
     fork in run := true
   )
-
-

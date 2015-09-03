@@ -1,6 +1,7 @@
-@import controllers.Application.DeceasedMsg
+@import controllers.DeceasedMsg
+@import helper._
 
-@(msg: String, dmsgForm: Form[DeceasedMsg])
+@(msg: String, dmsgForm: Form[DeceasedMsg])(implicit messages: Messages)
 
 <!DOCTYPE html>
 
@@ -13,11 +14,11 @@
     </head>
     <body>
         <img src="@routes.Assets.at("images/typesafe_conductR_full_color.svg")" class="conductr-logo">
-        @helper.form(action = routes.Application.sendMsg()){
-        @helper.inputText(dmsgForm("message"))
-        <div class="form-actions">
-           <button id="submit" type="submit" class="btn btn-primary">Send</button>
-        </div>
+        @form(action = routes.Application.sendMsg()){
+            @inputText(dmsgForm("message"))
+            <div class="form-actions">
+               <button id="submit" type="submit" class="btn btn-primary">Send</button>
+            </div>
         }
     </body>
 </html>

@@ -1,5 +1,7 @@
 package controllers
 
+import javax.inject.Inject
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.Future
@@ -14,14 +16,14 @@ import akka.util.Timeout
 import app.actors.Delivery
 import app.actors.Delivery.{ Ack, DeliveryMsg }
 import play.api.mvc.{ Action, Controller }
+import play.api.i18n.{MessagesApi, I18nSupport}
 
-object Application extends Controller {
+class Application @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
   val actorSystem = ActorSystem("CharonActorSystem")
-  val deliveryActor = actorSystem.actorOf(Props[Delivery], "delivery")
+  val deliveryActor = actorSystem.actorOf(Delivery.props, "delivery")
   implicit val timeout = Timeout(5.seconds)
 
-  case class DeceasedMsg(msg: String)
   val DeceasedMsgForm = Form(
     mapping(
       "message" -> nonEmptyText)(DeceasedMsg.apply)(DeceasedMsg.unapply))
@@ -48,3 +50,5 @@ object Application extends Controller {
     Future.successful(Ok(views.html.reply(replyMsg)))
   }
 }
+
+case class DeceasedMsg(msg: String)

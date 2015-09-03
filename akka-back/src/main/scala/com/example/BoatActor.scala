@@ -2,6 +2,10 @@ package com.example
 
 import akka.actor.{ Actor, ActorLogging, Props }
 
+object BoatActor {
+  val props: Props = Props(new BoatActor)
+}
+
 class BoatActor extends Actor with ActorLogging {
 
   def receive = {
@@ -9,8 +13,4 @@ class BoatActor extends Actor with ActorLogging {
       log.info("BoatActor - received message: {}", msg)
       sender() ! Status.Success
   }
-}
-
-object BoatActor {
-  val props: Props = Props(new BoatActor)
 }
