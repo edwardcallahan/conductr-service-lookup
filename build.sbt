@@ -4,7 +4,8 @@ name := "conductR-service-lookup"
 
 SandboxKeys.image in Global := "conductr/conductr"
 SandboxKeys.imageVersion in Global := "latest"
-SandboxKeys.nrOfContainers in Global := 3
+SandboxKeys.nrOfContainers in Global := 1
+SandboxKeys.ports in Global := Set(5601)
 
 lazy val commonSettings = Seq(
   version := "0.1.0-SNAPSHOT",
@@ -12,7 +13,7 @@ lazy val commonSettings = Seq(
 )
 
 lazy val charonShopApp = (project in file("play-front"))
-  .enablePlugins(PlayScala, ConductRPlugin, ConductRSandbox)
+  .enablePlugins(PlayScala)
   .settings(commonSettings: _*)
   .settings(
     name := "charon-shop",
@@ -29,7 +30,6 @@ lazy val charonShopApp = (project in file("play-front"))
   )
 
 lazy val ferryService = (project in file("akka-back"))
-  .enablePlugins(ConductRPlugin, ConductRSandbox)
   .settings(commonSettings: _*)
   .settings(
     name := "ferry-boat",
